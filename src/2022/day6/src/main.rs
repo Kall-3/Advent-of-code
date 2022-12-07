@@ -1,7 +1,7 @@
 use std::collections::VecDeque;
 
 fn main() {
-    part1()
+    part2()
 }
 
 fn part1() {
@@ -30,7 +30,7 @@ fn part1() {
         }
         println!("");
 
-        if head.len() == 14 {
+        if head.len() == 4 {
             break
         }
     }
@@ -38,5 +38,13 @@ fn part1() {
     let head: String = head.clone().into_iter().collect::<String>();
     let head: &str = &*head;
     let idx = f.find(head).unwrap();
-    println!("{}", idx+14);
+    println!("{}", idx+4);
+}
+
+fn part2() {
+    let mut head = VecDeque::new();
+    
+    let f: String = include_str!("input2.txt").chars().map(|x| if head.contains(&x) { ' ' } else { head.push_back(x) }).into_iter().collect();
+
+    println!("{}", f);
 }

@@ -19,22 +19,22 @@ impl Dir {
     }
 }
 
-fn ret_size(dir: Rc<RefCell<Dir>>) {
+fn ret_size(dir: Rc<RefCell<Dir>>, seeked: u32) -> u32 {
     let dir_clone = Rc::clone(&dir);
-    let y = dir_clone.borrow().size;
-    if y > 4125990 {
-        println!("{}", y);
-    }
+    let mut best_memory = dir_clone.borrow().size;
+
     for d in &dir_clone.borrow().children {
-        let d_d = Rc::clone(&d);
-        ret_size(d_d);
+        let r_best = ret_size(Rc::clone(&d), seeked);
+        if r_best > seeked && r_best < best_memory {
+            best_memory = r_best;
+        }
     }
+
+    best_memory
 }
 
 fn main() {
-    
     let input = include_str!("input.txt");
-
     let home = Rc::new(RefCell::new(Dir::new("/".to_string(), None)));
     let mut current = Rc::clone(&home);
 
@@ -80,8 +80,11 @@ fn main() {
             }
         }
     );
-
+    
     let f = Rc::clone(&home);
-    ret_size(f);
+    let seeked = f.borrow().size + 30000000 - 70000000;
+    let best = ret_size(f, seeked);
+
+    println!("{}", best);
 }
 

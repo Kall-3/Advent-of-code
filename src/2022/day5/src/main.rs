@@ -38,7 +38,7 @@ fn part1() {
 }
 
 fn part2() {
-    let (crates, instructions) = include_str!("input.txt").split_once("\r\n\r\n").unwrap_or(("",""));
+    let (crates, instructions) = include_str!("input3.txt").split_once("\r\n\r\n").unwrap_or(("",""));
     let crates: Vec<Vec<char>> = crates.split("\r\n").map(|x| x.chars().collect::<Vec<char>>()).collect();
     let instructions: Vec<Vec<usize>> = instructions.split("\r\n").map(|x| x.split(" ").into_iter().filter_map(|x| x.parse::<usize>().ok()).collect::<Vec<usize>>()).collect();
 

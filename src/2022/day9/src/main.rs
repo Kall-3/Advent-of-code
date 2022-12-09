@@ -23,6 +23,10 @@ impl Pos {
         (self.x_pos - other.x_pos).abs() <= 1 && (self.y_pos - other.y_pos).abs() <= 1
     }
 
+    fn tail_move_dir(&self, other: &Pos) -> (i32, i32) {
+        (1,1)
+    }
+
     fn eq(&self, other: &Pos) -> bool {
         self.x_pos == other.x_pos && self.y_pos == other.y_pos
     }
@@ -30,6 +34,55 @@ impl Pos {
     fn print(&self) {
         println!("({}, {})", self.x_pos, self.y_pos);
     }
+}
+
+fn part2() {
+    let instructions: Vec<(char, i32)> = include_str!("test_input2.txt").lines().map(|x| x.split_once(' ').unwrap()).collect::<Vec<(&str,&str)>>().iter().map(|x| (x.0.parse::<char>().unwrap(), x.1.parse::<i32>().unwrap())).collect();
+    
+    let mut head_pos: Pos = Pos { x_pos: 0, y_pos: 0 };
+    let mut tail_pos: Vec<Pos> = Vec::new();
+    let mut visited: Vec<Pos> = Vec::new();
+    for i in 0..9 {
+        tail_pos.push(head_pos.clone());
+    }
+    visited.push(tail_pos[8].clone());
+
+
+    for i in instructions {
+        match i.0 {
+            'R' => {
+                for j in 0..i.1 {
+                    let prev = head_pos.clone();
+                    head_pos.move_pos(1,0);
+
+                    let vertical = if &head_pos.y_pos > &tail_pos[0].y_pos { 1 } else { -1 };
+                    for pos in tail_pos {
+                        if pos.touching(&prev) {
+                            
+                        }
+                        prev = pos.clone();
+                    }
+                }
+            }
+            'L' => {
+                for j in 0..i.1 {
+                    head_pos.move_pos(-1,0);
+                }
+            }
+            'U' => {
+                for j in 0..i.1 {
+                    head_pos.move_pos(0,1);
+                }
+            }
+            'D' => {
+                for j in 0..i.1 {
+                    head_pos.move_pos(0,-1);
+                }
+            }
+            _ => println!("Not a instruction!")
+        }
+    }
+    println!("{}", visited.len());
 }
 
 fn part1() {

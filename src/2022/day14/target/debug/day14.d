@@ -1,0 +1,1 @@
+C:\Users\Karl-Johan\ Petersson\Documents\School\Advent\ of\ code\src\2022\day14\target\debug\day14.exe: C:\Users\Karl-Johan\ Petersson\Documents\School\Advent\ of\ code\src\2022\day14\src\input.txt C:\Users\Karl-Johan\ Petersson\Documents\School\Advent\ of\ code\src\2022\day14\src\main.rs

@@ -78,7 +78,7 @@ fn part2() {
 }
 
 fn part1() {
-    let input = include_str!("input.txt").lines();
+    let input = include_str!("test_input.txt").lines();
     let mut cave = Cave::new();
 
     for line in input {
@@ -93,7 +93,9 @@ fn part1() {
     let mut sand_count = 0;
     while drop_sand(&mut cave, (500, 1)) {
         sand_count += 1;
+        cave.print_cave(493..=504);
     }
+
     println!("{sand_count:?}")
 }
 

@@ -1,4 +1,4 @@
-use std::{collections::HashSet, ops::RangeInclusive, io::Write};
+use std::{ops::RangeInclusive, io::Write};
 use tuple_map::TupleMap2;
 use range_set::*;
 

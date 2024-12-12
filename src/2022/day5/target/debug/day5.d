@@ -1,1 +1,0 @@
-C:\Users\kalle\Documents\School\Advent\ of\ code\src\2022\day5\target\debug\day5.exe: C:\Users\kalle\Documents\School\Advent\ of\ code\src\2022\day5\src\input.txt C:\Users\kalle\Documents\School\Advent\ of\ code\src\2022\day5\src\input3.txt C:\Users\kalle\Documents\School\Advent\ of\ code\src\2022\day5\src\main.rs

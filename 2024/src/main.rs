@@ -1,0 +1,43 @@
+mod problem;
+mod days;
+
+use std::env;
+
+use problem::Problem;
+use days::*;
+
+fn day_to_problem(day: usize) -> Option<Box<dyn Problem>> {
+    match day {
+        1 => Some(Box::new(DayOne{})),
+        2 => Some(Box::new(DayTwo{})),
+        _ => None,
+    }
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        println!("Usage: {} <day> <optional: testing 0/1>", args[0]);
+        return;
+    }
+
+    let day = args[1].parse::<usize>().expect("Day must be a number");
+    let testing = args.get(2).map(|s| s == "1").unwrap_or(false);
+
+    if let Some(problem) = day_to_problem(day) {
+        let input_path = if testing {
+            println!("Running with test data");
+            format!("inputs/day{}_test.txt", day)
+        } else {
+            format!("inputs/day{}.txt", day)
+        };
+
+        let input = std::fs::read_to_string(input_path)
+            .expect("Failed to read input file");
+
+        println!("Day {}: Part one: {}", day, problem.part_one(&input));
+        println!("Day {}: Part two: {}", day, problem.part_two(&input));
+    } else {
+        println!("Day {} not implemented", day);
+    }
+}

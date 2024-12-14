@@ -42,12 +42,18 @@ impl Problem for DayTwo {
                 if diff.abs() < 1 || diff.abs() > 3 || diff * direction < 0 {
                     if tolerance == 0 {
                         tolerance = 1;
-                        j += 1;
-                        if j >= report.len() {
-                            break;
-                        }
-                        let diff = report[i] - report[j];
-                        if diff.abs() < 1 || diff.abs() > 3 || diff * direction < 0 {
+
+                        if j + 1 < report.len() {
+                            let diff1 = report[i] - report[j + 1];
+                            let diff2 = report[j] - report[j + 1];
+                            if diff1.abs() > 0 && diff1.abs() < 4 && diff1 * direction > 0 {
+                                j += 1;
+                                continue;
+                            } else if diff2.abs() > 0 && diff2.abs() < 4 && diff2 * direction > 0 {
+                                i = j;
+                                j += 1;
+                                continue;
+                            }
                             problems += 1;
                             break;
                         }

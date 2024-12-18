@@ -1,8 +1,8 @@
 use crate::problem::Problem;
 
-pub struct Day {}
+pub struct DayTwentyTwo {}
 
-impl Problem for Day {
+impl Problem for DayTwentyTwo {
     fn part_one(&self, _input: &str) -> String {
         format!("{}", "Part one not implemented")
     }

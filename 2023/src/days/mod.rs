@@ -10,6 +10,9 @@ pub mod day09;
 pub mod day10;
 pub mod day11;
 pub mod day12;
+pub mod day13;
+pub mod day14;
+pub mod day15;
 
 pub use day01::DayOne;
 pub use day02::DayTwo;
@@ -23,3 +26,6 @@ pub use day09::DayNine;
 pub use day10::DayTen;
 pub use day11::DayEleven;
 pub use day12::DayTwelve;
+pub use day13::DayThirteen;
+pub use day14::DayFourteen;
+pub use day15::DayFifteen;

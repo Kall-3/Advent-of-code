@@ -31,31 +31,25 @@ fn main() {
     }
 
     let day = args[1].parse::<usize>().expect("Day must be a number");
-    let testing = args.get(2).map(|s| s == "1").unwrap_or(false);
-
-    let (test_file_1, test_file_2) = if args.len() >= 5 {
-        (args[3].clone(), args[4].clone())
-    } else if args.len() == 4 {
-        (args[3].clone(), String::new())
-    } else {
-        (String::new(), String::new())
-    };
+    let test_file_1 = args.get(2).cloned().unwrap_or_else(|| String::new());
+    let test_file_2 = args.get(3).cloned().unwrap_or_else(|| String::new());
+    let testing = !test_file_1.is_empty();
 
     if let Some(problem) = day_to_problem(day) {
         let (input_path_1, input_path_2) = if testing {
-            if !test_file_1.is_empty() && !test_file_2.is_empty() {
-                (format!("inputs/day{:02}_{}.txt", day, test_file_1),
-                 format!("inputs/day{:02}_{}.txt", day, test_file_2))
-            } else if !test_file_1.is_empty() {
-                (format!("inputs/day{:02}_{}.txt", day, test_file_1),
-                 format!("inputs/day{:02}_{}.txt", day, test_file_1))
+            if test_file_1 == "1" {
+                (format!("inputs/day{:02}t", day), 
+                 format!("inputs/day{:02}t", day))
+            } else if !test_file_2.is_empty() {
+                (format!("inputs/day{:02}{}", day, test_file_1),
+                 format!("inputs/day{:02}{}", day, test_file_2))
             } else {
-                (format!("inputs/day{:02}_test.txt", day), 
-                 format!("inputs/day{:02}_test.txt", day))
+                (format!("inputs/day{:02}{}", day, test_file_1),
+                 format!("inputs/day{:02}{}", day, test_file_1))
             }
         } else {
-            (format!("inputs/day{:02}.txt", day),
-             format!("inputs/day{:02}.txt", day))
+            (format!("inputs/day{:02}", day),
+             format!("inputs/day{:02}", day))
         };
 
         let input_1 = std::fs::read_to_string(&input_path_1)

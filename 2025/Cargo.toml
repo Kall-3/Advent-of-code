@@ -5,3 +5,5 @@ edition = "2024"
 
 [dependencies]
 regex = "1.12.2"
+ordered-float = { version = "5.0", default-features = false }
+z3 = "0.19.6"
